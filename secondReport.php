@@ -26,12 +26,15 @@
         </tr>
 
     <?php
-        $query = "SELECT s.sale_date, CONCAT_WS(' ', e.first_name, e.last_name) as employee_name, e.position, 
+        $query = "SELECT s.sale_date, CONCAT_WS(' ', e.first_name, e.last_name) as employee_name, p.name as p_name, 
                 CONCAT_WS(' ', cl.first_name, cl.last_name) as client_name,cl.phone, 
-                c.id, c.brand, c.model, c.price FROM sales s
+                c.id, b.name as brand_name, m.name as model_name, c.price FROM sales s
                 JOIN employees e ON s.employee_id = e.id
                 JOIN clients cl ON s.client_id = cl.id
                 JOIN cars c ON s.car_id = c.id
+                JOIN positions p ON e.position_id = p.id
+                JOIN brands b ON c.brand_id = b.id
+                JOIN models m ON c.model_id = m.id
                 ORDER BY s.sale_date DESC, c.price DESC
                 LIMIT 5;";
 
@@ -40,13 +43,13 @@
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["employee_name"] . "</td>";
-                echo "<td>" . $row["position"] . "</td>";
+                echo "<td>" . $row["p_name"] . "</td>";
                 echo "<td>" . $row["sale_date"] . "</td>";
                 echo "<td>" . $row["client_name"] . "</td>";
                 echo "<td>" . $row["phone"] . "</td>";
                 echo "<td>" . $row["id"] . "</td>";
-                echo "<td>" . $row["brand"] . "</td>";
-                echo "<td>" . $row["model"] . "</td>";
+                echo "<td>" . $row["brand_name"] . "</td>";
+                echo "<td>" . $row["model_name"] . "</td>";
                 echo "<td>" . $row["price"] . "</td>";
                 echo "</tr>";
             }

@@ -5,11 +5,16 @@
     <file url="file://$PROJECT_DIR$/Client.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/Employee.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/Sell.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/cars.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/create-tables.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/editCar.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/editClient.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/editEmployee.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/employees.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/firstReport.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/sales.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/searchFunctions.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/secondReport.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/sellCar.php" dialect="GenericSQL" />
   </component>
 </project>

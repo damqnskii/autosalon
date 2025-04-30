@@ -51,15 +51,17 @@
                 <th>Година</th>
             </tr>
             <?php
-                $query = "SELECT c.id, c.brand, c.model, c.year FROM sales
-                    JOIN cars c ON sales.car_id = c.id;";
+                $query = "SELECT c.id, b.name as brand_name, m.name as model_name, c.year FROM sales
+                    JOIN cars c ON sales.car_id = c.id
+                    JOIN brands b ON c.brand_id = b.id
+                    JOIN models m ON c.model_id = m.id;";
                 $result = mysqli_query($conn, $query);
 
                 while($row = mysqli_fetch_array($result)){
                     echo "<tr>";
                     echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['brand'] . "</td>";
-                    echo "<td>" . $row['model'] . "</td>";
+                    echo "<td>" . $row['brand_name'] . "</td>";
+                    echo "<td>" . $row['model_name'] . "</td>";
                     echo "<td>" . $row['year'] . "</td>";
                     echo "</tr>";
                 }
@@ -75,14 +77,15 @@
                 <th>Дата на продажба</th>
             </tr>
             <?php
-                $query = "SELECT CONCAT_WS(' ', e.first_name, e.last_name) as name, e.phone, e.position, sale_date FROM sales
-                    JOIN employees e ON sales.employee_id = e.id;";
+                $query = "SELECT CONCAT_WS(' ', e.first_name, e.last_name) as name, e.phone, p.name as p_name, sale_date FROM sales
+                    JOIN employees e ON sales.employee_id = e.id
+                    JOIN positions p ON e.position_id = p.id;";
                 $result = mysqli_query($conn, $query);
                 while ($row = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>" . $row['name'] . "</td>";
                     echo "<td>" . $row['phone'] . "</td>";
-                    echo "<td>" . $row['position'] . "</td>";
+                    echo "<td>" . $row['p_name'] . "</td>";
                     echo "<td>" . $row['sale_date'] . "</td>";
                     echo "</tr>";
                 }

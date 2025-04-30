@@ -44,7 +44,11 @@
             if (isset($_GET["id"])) {
                 $carId = intval ($_GET["id"]);
 
-                $query = "SELECT * FROM cars WHERE id = $carId";
+                $query = "SELECT c.id, b.name as brand_name, m.name as model_name, c.year, co.name as color_name, c.mileage, c.price FROM cars c
+                        JOIN brands b ON c.brand_id = b.id
+                        JOIN colors co ON c.color_id = co.id
+                        JOIN models m ON c.model_id = m.id
+                        WHERE c.id = $carId";
                 $result = mysqli_query($conn, $query);
                 $row = mysqli_fetch_assoc($result);
 
@@ -52,13 +56,13 @@
                     <label for="id">Номер на колата</label>
                     <input type="text" name="carId" value="'.$row['id'].'" disabled>
                     <label for="brand">Марка</label>
-                    <input type="text" name="brand" value="'.$row['brand'].'" required>
+                    <input type="text" name="brand" value="'.$row['brand_name'].'" required>
                     <label for="model">Модел</label>
-                    <input type="text" name="model" value="'.$row['model'].'" required>
+                    <input type="text" name="model" value="'.$row['model_name'].'" required>
                     <label for="year">Година</label>
                     <input type="text" name="year" value="'.$row['year'].'" required>
                     <label for="color">Цвят</label>
-                    <input type="text" name="color" value="'.$row['color'].'" required>
+                    <input type="text" name="color" value="'.$row['color_name'].'" required>
                     <label for="mileage">Изминати километри</label>
                     <input type="text" name="mileage" value="'.$row['mileage'].'" required>
                     <label for="price">Цена</label>
@@ -128,7 +132,9 @@
         $employeePosition = $_POST['position'];
         $sellingDate = $_POST['sellingDate'];
 
-        $query = $conn->prepare("SELECT id FROM employees WHERE first_name = ? and last_name = ? and position = ?");
+        $query = $conn->prepare("SELECT e.id FROM employees e
+        JOIN positions p ON e.position_id = p.id
+          WHERE first_name = ? and last_name = ? and p.name = ?");
         $query->bind_param("sss", $employeeFirstName, $employeeLastName, $employeePosition);
         $query->execute();
         $result = $query->get_result();
@@ -146,7 +152,11 @@
         $mileage = $_POST['mileage'];
         $price = $_POST['price'];
 
-        $stmt = $conn->prepare("SELECT id FROM cars WHERE brand = ? AND model = ? AND year = ? AND color = ? AND mileage = ? AND price = ?");
+        $stmt = $conn->prepare("SELECT c.id FROM cars c
+            JOIN brands b ON c.brand_id = b.id
+            JOIN colors co ON c.color_id = co.id
+            JOIN models m ON c.model_id = m.id
+            WHERE b.name = ? AND m.name = ? AND year = ? AND co.name = ? AND mileage = ? AND price = ?");
         $stmt->bind_param("ssisid",$brand, $model, $year, $color, $mileage, $price);
         $stmt->execute();
         $result = $stmt->get_result();

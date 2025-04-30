@@ -37,12 +37,15 @@
                     $firstName = $_GET["firstName"];
                     $lastName = $_GET["lastName"];
 
-                    $query = $conn->prepare("SELECT s.sale_date, CONCAT_WS(' ', e.first_name, e.last_name) as employee_name, e.position, 
+                    $query = $conn->prepare("SELECT s.sale_date, CONCAT_WS(' ', e.first_name, e.last_name) as employee_name, p.name as p_name,
                             CONCAT_WS(' ', cl.first_name, cl.last_name) as client_name,cl.phone, 
-                            c.id, c.brand, c.model, c.year FROM sales s
+                            c.id, b.name as brand_name, m.name as model_name, c.year FROM sales s
                             JOIN employees e ON s.employee_id = e.id
+                            JOIN positions p ON e.position_id = p.id
                             JOIN clients cl ON s.client_id = cl.id
                             JOIN cars c ON s.car_id = c.id
+                            JOIN models m ON c.model_id = m.id
+                            JOIN brands b ON c.brand_id = b.id
                             WHERE e.first_name = ? AND e.last_name = ?
                             ORDER BY s.sale_date;");
                     $query->bind_param("ss", $firstName, $lastName);
@@ -53,13 +56,13 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
                             echo "<td>" . $row["employee_name"] . "</td>";
-                            echo "<td>" . $row["position"] . "</td>";
+                            echo "<td>" . $row["p_name"] . "</td>";
                             echo "<td>" . $row["sale_date"] . "</td>";
                             echo "<td>" . $row["client_name"] . "</td>";
                             echo "<td>" . $row["phone"] . "</td>";
                             echo "<td>" . $row["id"] . "</td>";
-                            echo "<td>" . $row["brand"] . "</td>";
-                            echo "<td>" . $row["model"] . "</td>";
+                            echo "<td>" . $row["brand_name"] . "</td>";
+                            echo "<td>" . $row["model_name"] . "</td>";
                             echo "<td>" . $row["year"] . "</td>";
                             echo "</tr>";
                         }

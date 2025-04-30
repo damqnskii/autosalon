@@ -72,7 +72,9 @@ include("emailValidationCheck.php");
             $id = intval($_GET["id"]);
             $conn->select_db("autosalon");
 
-            $query = "SELECT * FROM employees WHERE id = $id";
+            $query = "SELECT e.id, e.first_name, e.last_name, p.name, e.phone FROM employees e
+                    JOIN positions p on e.position_id = p.id
+                    WHERE e.id = $id;";
             $result = mysqli_query($conn, $query);
 
             if ($employee = mysqli_fetch_assoc($result)) {
@@ -81,7 +83,7 @@ include("emailValidationCheck.php");
                             <td>{$employee['id']}<input type='hidden' name='id' value='{$employee["id"]}'></td>
                             <td><input type='text' name='firstName' value='{$employee["first_name"]}'></td>
                             <td><input type='text' name='lastName' value='{$employee["last_name"]}'></td>
-                            <td><input type='text' name='position' value='{$employee["position"]}'></td>
+                            <td><input type='text' name='position' value='{$employee["name"]}'></td>
                             <td><input type='text' name='phoneNumber' value='{$employee["phone"]}'></td>
                             <td><button type='submit' class='btn'>Редактирай</button></td>
                         </tr>

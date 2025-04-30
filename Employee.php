@@ -14,15 +14,60 @@ class Employee
         $this->position = $position;
     }
 
+    private function isPositionExists($conn, $position) {
+        $query = $conn->prepare("SELECT * FROM positions WHERE name = ?");
+        $query->bind_param("s", $position);
+        $query->execute();
+        $result = $query->get_result();
+
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function add($conn) {
-        $stmt = $conn->prepare("INSERT INTO employees (first_name, last_name, position, phone) 
-             VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $this->firstName, $this->lastName, $this->position, $this->phoneNumber);
-        return $stmt->execute();
+        if (!$this->isPositionExists($conn, $this->position)) {
+            $insertPosition = $conn->prepare("INSERT INTO positions (name) VALUES (?)");
+            $insertPosition->bind_param("s", $this->position);
+            $insertPosition->execute();
+        }
+        $getPositionId = $conn->prepare("SELECT id FROM positions WHERE name = ?");
+        $getPositionId->bind_param("s", $this->position);
+        $getPositionId->execute();
+        $positionResult = $getPositionId->get_result();
+
+        if ($row = $positionResult->fetch_assoc()) {
+            $positionId = $row['id'];
+        } else {
+            return false;
+        }
+
+        $insertEmployee = $conn->prepare("INSERT INTO employees (first_name, last_name, position_id, phone) 
+                                      VALUES (?, ?, ?, ?)");
+        $insertEmployee->bind_param("ssis", $this->firstName, $this->lastName, $positionId, $this->phoneNumber);
+        return $insertEmployee->execute();
     }
     public function edit($conn, $id) {
-        $stmt = $conn->prepare("UPDATE employees SET first_name = ?, last_name = ?, position = ?, phone = ? WHERE id = ?");
-        $stmt->bind_param("ssssi", $this->firstName, $this->lastName, $this->position, $this->phoneNumber, $id);
+        if (!$this->isPositionExists($conn, $this->position)) {
+            $insertPosition = $conn->prepare("INSERT INTO positions (name) VALUES (?)");
+            $insertPosition->bind_param("s", $this->position);
+            $insertPosition->execute();
+        }
+        $getPositionId = $conn->prepare("SELECT id FROM positions WHERE name = ?");
+        $getPositionId->bind_param("s", $this->position);
+        $getPositionId->execute();
+        $positionResult = $getPositionId->get_result();
+
+        if ($row = $positionResult->fetch_assoc()) {
+            $positionId = $row['id'];
+        } else {
+            return false;
+        }
+
+        $stmt = $conn->prepare("UPDATE employees SET first_name = ?, last_name = ?, position_id = ?, phone = ? WHERE id = ?");
+        $stmt->bind_param("ssisi", $this->firstName, $this->lastName, $positionId, $this->phoneNumber, $id);
         return $stmt->execute();
     }
 

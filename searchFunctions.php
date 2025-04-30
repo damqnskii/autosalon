@@ -1,24 +1,28 @@
     <?php
         include ("config.php");
     function filterTheCars($conn, $brand, $model, $lowestYear, $highestYear, $color, $lowestMileage, $highestMileage, $minPrice, $maxPrice) {
-        $query = "SELECT * FROM cars WHERE 1=1";
+        $query = "SELECT *, b.name as brand_name, m.name as model_name, co.name as color_name FROM cars c
+                JOIN brands b ON c.brand_id = b.id
+                JOIN colors co ON c.color_id = co.id
+                JOIN models m ON c.model_id = m.id
+                WHERE 1=1";
         $types = "";
         $params = [];
         if (!empty($brand)) {
-            $query .= " AND brand LIKE CONCAT('%', ?, '%')";
+            $query .= " AND b.name LIKE CONCAT('%', ?, '%')";
             $types .= "s";
             $params[] = $brand;
         }
 
 
         if (!empty($model)) {
-            $query .= " AND model LIKE CONCAT('%', ?, '%')";
+            $query .= " AND m.name LIKE CONCAT('%', ?, '%')";
             $types .= "s";
             $params[] = $model;
         }
 
         if (!empty($color)) {
-            $query .= " AND color LIKE CONCAT('%', ?, '%')";
+            $query .= " AND co.name LIKE CONCAT('%', ?, '%')";
             $types .= "s";
             $params[] = $color;
         }

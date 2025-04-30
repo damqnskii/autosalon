@@ -30,7 +30,8 @@
         <?php
 
         $conn->select_db("autosalon");
-        $result = mysqli_query($conn, "SELECT * FROM employees");
+        $result = mysqli_query($conn, "SELECT e.id, e.first_name, e.last_name, e.phone, p.name FROM employees e
+                        JOIN positions p on e.position_id = p.id;");
         $i = 1;
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
@@ -38,7 +39,7 @@
                 <td>{$row['first_name']}</td>
                 <td>{$row['last_name']}</td>
                 <td>{$row['phone']}</td>
-                <td>{$row['position']}</td>
+                <td>{$row['name']}</td>
                 <td style='display: flex; flex-direction-column;align-content: center;justify-content: space-evenly;'>
                     <form action='editEmployee.php' method='get'>
                         <input type='hidden' name='id' value='{$row['id']}'>

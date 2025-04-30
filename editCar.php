@@ -50,7 +50,11 @@
                 $id = intval($_GET['id']);
 
                 mysqli_select_db($conn, "autosalon");
-                $query = "SELECT * FROM cars WHERE id = $id";
+                $query = "SELECT c.id, b.name as brand_name, m.name as model_name, c.year, co.name as color_name, c.mileage, c.price, c.status FROM cars c
+                        JOIN brands b ON c.brand_id = b.id
+                        JOIN colors co ON c.color_id = co.id
+                        JOIN models m ON c.model_id = m.id
+                        WHERE c.id = $id;";
                 $result = mysqli_query($conn, $query);
 
                 if ($row = mysqli_fetch_assoc($result)) {
@@ -58,10 +62,10 @@
                     echo "<form method='POST'>";
                     echo "<tr>";
                     echo "<td>{$row['id']}<input type='hidden' name='id' value='{$row["id"]}'></td>";
-                    echo "<td><input type='text' name='brand' value='{$row["brand"]}'></td>";
-                    echo "<td><input type='text' name='model' value='{$row["model"]}'></td>";
+                    echo "<td><input type='text' name='brand' value='{$row["brand_name"]}'></td>";
+                    echo "<td><input type='text' name='model' value='{$row["model_name"]}'></td>";
                     echo "<td><input type='text' name='year' value='{$row["year"]}'></td>";
-                    echo "<td><input type='text' name='color' value='{$row["color"]}'></td>";
+                    echo "<td><input type='text' name='color' value='{$row["color_name"]}'></td>";
                     echo "<td><input type='text' name='mileage' value='{$row["mileage"]}'></td>";
                     echo "<td><input type='text' name='price' value='{$row["price"]}'></td>";
                     echo "<td><select name='status'>

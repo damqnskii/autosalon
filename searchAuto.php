@@ -75,10 +75,10 @@
                     foreach ($cars as $car) {
                         echo "<tr>";
                         echo "<td>" . ($car['id']) . "</td>";
-                        echo "<td>" . ($car['brand']) . "</td>";
-                        echo "<td>" . ($car['model']) . "</td>";
+                        echo "<td>" . ($car['brand_name']) . "</td>";
+                        echo "<td>" . ($car['model_name']) . "</td>";
                         echo "<td>" . ($car['year']) . "</td>";
-                        echo "<td>" . ($car['color']) . "</td>";
+                        echo "<td>" . ($car['color_name']) . "</td>";
                         echo "<td>" . ($car['mileage']) . "</td>";
                         echo "<td>" . ($car['price']) . "</td>";
                         if ($car['status'] === 'продадена') {

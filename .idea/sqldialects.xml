@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Car.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Client.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Employee.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Sell.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/create-tables.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/editClient.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/firstReport.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/sales.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/searchFunctions.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/secondReport.php" dialect="GenericSQL" />
+  </component>
+</project>

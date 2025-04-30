@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: 'Mulish', 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+.report {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.report:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.report h2 {
+    font-size: 20px;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.report button {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.report button:hover {
+    background-color: #2980b9;
+}

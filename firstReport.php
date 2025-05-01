@@ -19,23 +19,24 @@
                 <input type="text" name="lastName">
                 <button type="submit">Търси</button>
             </form>
-            <table>
-                <tr>
-                    <th>Служител</th>
-                    <th>Позиция</th>
-                    <th>Дата</th>
-                    <th>Клиент</th>
-                    <th>Телефон на кл.</th>
-                    <th>Номер на кола</th>
-                    <th>Марка</th>
-                    <th>Модел</th>
-                    <th>Година</th>
-                </tr>
+
 
             <?php
                 if (isset($_GET["firstName"], $_GET["lastName"]) && trim($_GET["lastName"]) !== "") {
                     $firstName = $_GET["firstName"];
                     $lastName = $_GET["lastName"];
+                    echo "<table>
+                        <tr>
+                            <th>Служител</th>
+                            <th>Позиция</th>
+                            <th>Дата</th>
+                            <th>Клиент</th>
+                            <th>Телефон на кл.</th>
+                            <th>Номер на кола</th>
+                            <th>Марка</th>
+                            <th>Модел</th>
+                            <th>Година</th>
+                        </tr>";
 
                     $query = $conn->prepare("SELECT s.sale_date, CONCAT_WS(' ', e.first_name, e.last_name) as employee_name, p.name as p_name,
                             CONCAT_WS(' ', cl.first_name, cl.last_name) as client_name,cl.phone, 

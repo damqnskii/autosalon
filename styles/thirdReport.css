@@ -1,0 +1,108 @@
+body {
+    font-family: 'Mulish', sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+form {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: center;
+}
+
+form input[type="text"] {
+    width: 93%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+    align-items: center;
+}
+
+form input[type="text"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.btn {
+    display:flex;
+    justify-content: center;
+}
+
+button {
+    display: block;
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+
+table {
+    width: 100%;
+    padding: 20px;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: center;
+}
+
+table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #d1e7fd;
+    cursor: pointer;
+}
+
+table td {
+    color: #333;
+}
+

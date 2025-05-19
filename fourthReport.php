@@ -62,7 +62,7 @@
                         echo "<td>" . $row["id"] . "</td>";
                         echo "<td>" . $row["brand_name"] . "</td>";
                         echo "<td>" . $row["model_name"] . "</td>";
-                        echo "<td>" . $row["price"] . "</td>";
+                        echo "<td>" . $row["price"] . " лв</td>";
                         echo "</tr>";
                     }
                 }
